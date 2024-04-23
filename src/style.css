@@ -1,0 +1,156 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #eafdfc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.app-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Zentrieren des Inhalts horizontal */
+}
+
+#container {
+  background-color: #bfeaf5;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 320px;
+  margin-top: 20px; /* Abstand zwischen Logo und Container */
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 1px;
+  text-align: center;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.7rem;
+}
+
+input[type="text"] {
+  width: calc(
+    100% - 80px
+  ); /* Breite des Inputfelds abzüglich Platz für den Button */
+  padding: 10px;
+  margin-right: 10px;
+  border: 2px solid;
+  border-color: #82aae3;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+}
+
+input[type="text"]::placeholder {
+  color: #aaa;
+}
+
+button {
+  background-color: #91d8e4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#add-button {
+  background-color: #82aae3;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+#add-button:hover {
+  background-color: #91d8e4;
+}
+button:hover {
+  background-color: #e38294;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0px 5px 5px 0px;
+}
+
+li {
+  background-color: #fff;
+  padding: 0.4rem;
+  margin-bottom: 0.3rem;
+  border: 2px solid;
+  border-color: #82aae3;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 1px 0.5px 2px 0.5px #82aae3;
+}
+
+li .deleteButton {
+  background-color: #eafdfc;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 8px;
+  margin-left: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0;
+  background-image: url("./images/close2.png"); /* Hinzufügen des Error-Bildes als Hintergrundbild */
+  background-size: cover;
+}
+
+li .deleteButton:hover {
+  background-color: #e382a263;
+}
+
+.doneButton {
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  border: solid 2px;
+  border-color: #82aae3;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.doneButton:hover {
+  background-color: #fff;
+}
+
+#print-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #91d8e478;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px; /* Breite des Bildes */
+  height: 20px; /* Höhe des Bildes */
+  padding: 0; /* Kein Innenabstand im Button */
+  border: none; /* Keine Rahmen um den Button */
+  background: none; /* Kein Hintergrund für den Button */
+  cursor: pointer; /* Cursor als Zeiger */
+  transition: background-color 0.3s ease;
+}
+
+#print-button:hover {
+  background-color: #82aae3;
+}
