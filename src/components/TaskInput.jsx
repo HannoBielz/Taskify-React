@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import TaskCard from "./TaskCard";
 
-function TaskInput() {
+function TaskInput({ onTaskAdd }) {
   const [taskInputValue, setTaskInputValue] = useState("");
 
   const handleInputChange = (event) => {
@@ -10,13 +11,8 @@ function TaskInput() {
   const addTask = () => {
     if (taskInputValue.trim() !== "") {
       console.log("Add Task");
+      onTaskAdd(taskInputValue);
 
-      // Hier wird der onTaskAdd-Prop erstellt und die neue Aufgabe übergeben
-      if (typeof onTaskAdd === "function") {
-        onTaskAdd(taskInputValue);
-      }
-
-      // Leeren Sie das Eingabefeld
       setTaskInputValue("");
     } else {
       console.log("Ixnput is empty");
@@ -30,19 +26,21 @@ function TaskInput() {
   };
 
   return (
-    <div className="input-container">
-      <input
-        id="todo-input"
-        type="text"
-        placeholder="Enter a task ..."
-        value={taskInputValue}
-        onChange={handleInputChange}
-        onKeyPress={handleKeyPress}
-      />
-      <button id="add-button" onClick={addTask}>
-        Add
-      </button>
-    </div>
+    <>
+      <div className="input-container">
+        <input
+          id="todo-input"
+          type="text"
+          placeholder="Enter a task ..."
+          value={taskInputValue}
+          onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
+        />
+        <button id="add-button" onClick={addTask}>
+          Add
+        </button>
+      </div>
+    </>
   );
 }
 

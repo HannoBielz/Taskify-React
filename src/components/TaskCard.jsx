@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 const TaskCard = ({ id, task }) => {
-  // [textStatus, settextStatus] = useState("none");
-  const [textDec, setTextDec] = useState("none");
   const [isChecked, setIsChecked] = useState(false);
 
   function markasDone() {
