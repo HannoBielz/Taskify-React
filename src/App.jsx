@@ -24,13 +24,24 @@ function App() {
     setTasks([...tasks, newTask]);
   }
 
+  // Function to delete a task
+  function deleteTask(taskId) {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(updatedTasks);
+  }
+
   return (
     <>
       <h1>To Do List</h1>
-      {/* <TaskInput onTaskAdd={setInput} /> */}
       <TaskInput onTaskAdd={addTask} />
+      {/* Pass deleteTask function to TaskCard component */}
       {tasks.map((task) => (
-        <TaskCard key={task.id} id={task.id} task={task.task} />
+        <TaskCard
+          key={task.id}
+          id={task.id}
+          task={task.task}
+          onDelete={deleteTask}
+        />
       ))}
     </>
   );
