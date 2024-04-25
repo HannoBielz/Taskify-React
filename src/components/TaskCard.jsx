@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 
-const TaskCard = ({ id, task }) => {
+const TaskCard = ({ id, task, onDelete }) => {
   const [isChecked, setIsChecked] = useState(false);
 
-  function markasDone() {
+  function markAsDone() {
     setIsChecked(!isChecked);
+  }
+
+  function handleDelete() {
+    // Call the onDelete function with the task id
+    if (typeof onDelete === "function") {
+      onDelete(id);
+    }
   }
 
   return (
     <li>
-      {" "}
       <button
         className="doneButton"
         id={`doneButton${id}`}
-        onClick={markasDone}
+        onClick={markAsDone}
         style={{
           backgroundColor: isChecked && "#79e9a2",
           padding: isChecked && "1px",
@@ -29,8 +35,16 @@ const TaskCard = ({ id, task }) => {
       >
         {task}
       </p>
-      <button className="deleteButton" id={`deleteButton${id}`}></button>
+      {/* Call handleDelete function when delete button is clicked */}
+      <button
+        className="deleteButton"
+        id={`deleteButton${id}`}
+        onClick={handleDelete}
+      >
+        Delete
+      </button>
     </li>
   );
 };
+
 export default TaskCard;
