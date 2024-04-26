@@ -4,46 +4,55 @@ import TaskCard from "./TaskCard";
 import taskifyLogo from "../assets/Taskify.svg";
 
 function TaskUI() {
-  // State to manage the tasks
+  // State for the list of tasks
   const [tasks, setTasks] = useState([]);
+  // State to check if at least one list item exists
+  const [hasTasks, setHasTasks] = useState(false);
 
-  // useEffect hook to load tasks from local storage when the component mounts
+  // Effect to load tasks from local storage when the component mounts
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem("tasks"));
     if (savedTasks) {
       setTasks(savedTasks);
+      // If tasks exist, set hasTasks to true
+      setHasTasks(true);
     }
   }, []);
 
-  // Function to add a new task
+  // Function to add a task
   function addTask(taskInputValue) {
-    // Create a new task object
     const newTask = {
-      id: tasks.length + 1, // Assign a unique ID
-      task: taskInputValue, // Task content
+      id: tasks.length + 1,
+      task: taskInputValue,
     };
-    // Update the tasks state with the new task
     setTasks([...tasks, newTask]);
-    // Save the updated tasks to local storage
+    // Save tasks to local storage
     saveTasksToLocalStorage([...tasks, newTask]);
+    // Set hasTasks to true since at least one list item exists
+    setHasTasks(true);
   }
 
   // Function to delete a task
   function deleteTask(taskId) {
-    // Filter out the task with the given taskId
     const updatedTasks = tasks.filter((task) => task.id !== taskId);
-    // Update the tasks state with the filtered tasks
     setTasks(updatedTasks);
-    // Save the updated tasks to local storage
+    // Update tasks in local storage
     saveTasksToLocalStorage(updatedTasks);
+    // Check if tasks still exist
+    if (updatedTasks.length === 0) {
+      // If no tasks remain, set hasTasks to false
+      setHasTasks(false);
+    }
   }
 
   // Function to delete all tasks
   function deleteAll() {
-    // Clear the tasks state
+    // Clear the task list
     setTasks([]);
     // Remove tasks from local storage
     localStorage.removeItem("tasks");
+    // Set hasTasks to false since no tasks remain
+    setHasTasks(false);
   }
 
   // Function to save tasks to local storage
@@ -54,30 +63,31 @@ function TaskUI() {
   return (
     <>
       <div className="app-content">
-        {/* Logo */}
         <h1>
           <img src={taskifyLogo} alt="" width="300rem" />
         </h1>
         <br />
         <div id="container">
-          {/* Task input component */}
+          {/* Component for adding new tasks */}
           <TaskInput onTaskAdd={addTask} />
-          {/* Separator */}
           <div className="seperator" />
-          {/* Task list */}
           <ul id="todo-list">
-            {/* Map through tasks and render TaskCard component for each task */}
+            {/* Cards for each task */}
             {tasks.map((task) => (
               <TaskCard
                 key={task.id}
                 id={task.id}
                 task={task.task}
-                onDelete={deleteTask} // Pass deleteTask function to TaskCard
+                onDelete={deleteTask} // onDelete function for deleting a task
               />
             ))}
           </ul>
-          {/* Button to delete all tasks */}
-          <button id="delete-all-button" onClick={deleteAll}>
+          {/* Button for deleting all tasks */}
+          <button
+            id="delete-all-button"
+            onClick={deleteAll}
+            style={{ display: hasTasks ? "block" : "none" }} // Display the button only if hasTasks is true
+          >
             Delete all
           </button>
         </div>
