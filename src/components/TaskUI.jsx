@@ -154,9 +154,11 @@ function TaskUI() {
               ))}
           </ul>
           {/* Button to delete all tasks */}
-          <button id="delete-all-button" onClick={deleteAll}>
-            Delete all
-          </button>
+          {(tasks.length > 0 || doneTasks.length > 0) && (
+            <button id="delete-all-button" onClick={deleteAll}>
+              Delete all
+            </button>
+          )}
         </div>
       </div>
     </>
