@@ -1,89 +1,138 @@
-import React, { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+// import TaskInput from "./TaskInput";
+// import TaskCard from "./TaskCard";
+// import taskifyLogo from "../assets/Taskify.svg";
+
+// function TaskUI() {
+//     const [tasks, setTasks] = useState([]);
+    
+//     function addTask(taskInputValue) {
+//         const newTask = {
+//           id: tasks.length + 1,
+//           task: taskInputValue,
+//         };
+//         setTasks([...tasks, newTask]);
+//       }
+
+//     // Function to delete a task
+//     function deleteTask(taskId) {
+//         const updatedTasks = tasks.filter((task) => task.id !== taskId);
+//         setTasks(updatedTasks);
+//       }
+
+//     // Function to delete all tasks
+//     function deleteAll() {
+//             setTasks([]);
+//     }
+
+//     // Function to make Delete all button visible
+
+
+// return (
+
+//     <>
+//     <div className="app-content">
+//         <h1>
+//             <img 
+//                 src={taskifyLogo} 
+//                 alt="" width="300rem" 
+//             />
+//         </h1>
+//         <br />
+//             <div id="container">
+//                 <TaskInput 
+//                 onTaskAdd={addTask}
+//              />
+//             <div className="seperator" />
+//             <ul 
+//                 id="todo-list">{tasks.map((task) => (
+//                 <TaskCard
+//                 key={task.id}
+//                 id={task.id}
+//                 task={task.task}
+//                 onDelete={deleteTask}
+//                 />
+//             ))
+//             }
+//         </ul>
+//             <button 
+//             id="delete-all-button" 
+//             onClick={deleteAll}>
+//                 Delete all</button>
+//         </div>
+//     </div>
+//     </>
+
+//   );
+// }
+
+// export default TaskUI
+
+
+import { useEffect, useState } from "react";
 import TaskInput from "./TaskInput";
 import TaskCard from "./TaskCard";
 import taskifyLogo from "../assets/Taskify.svg";
 
 function TaskUI() {
-  // State to manage the tasks
-  const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState([]);
+    
+    function addTask(taskInputValue) {
+        const newTask = {
+          id: tasks.length + 1,
+          task: taskInputValue,
+        };
+        setTasks([...tasks, newTask]);
+      }
 
-  // useEffect hook to load tasks from local storage when the component mounts
-  useEffect(() => {
-    const savedTasks = JSON.parse(localStorage.getItem("tasks"));
-    if (savedTasks) {
-      setTasks(savedTasks);
+    // Function to delete a task
+    function deleteTask(taskId) {
+        const updatedTasks = tasks.filter((task) => task.id !== taskId);
+        setTasks(updatedTasks);
+      }
+
+    // Function to delete all tasks
+    function deleteAll() {
+            setTasks([]);
     }
-  }, []);
 
-  // Function to add a new task
-  function addTask(taskInputValue) {
-    // Create a new task object
-    const newTask = {
-      id: tasks.length + 1, // Assign a unique ID
-      task: taskInputValue, // Task content
-    };
-    // Update the tasks state with the new task
-    setTasks([...tasks, newTask]);
-    // Save the updated tasks to local storage
-    saveTasksToLocalStorage([...tasks, newTask]);
-  }
+return (
 
-  // Function to delete a task
-  function deleteTask(taskId) {
-    // Filter out the task with the given taskId
-    const updatedTasks = tasks.filter((task) => task.id !== taskId);
-    // Update the tasks state with the filtered tasks
-    setTasks(updatedTasks);
-    // Save the updated tasks to local storage
-    saveTasksToLocalStorage(updatedTasks);
-  }
-
-  // Function to delete all tasks
-  function deleteAll() {
-    // Clear the tasks state
-    setTasks([]);
-    // Remove tasks from local storage
-    localStorage.removeItem("tasks");
-  }
-
-  // Function to save tasks to local storage
-  function saveTasksToLocalStorage(tasks) {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }
-
-  return (
     <>
-      <div className="app-content">
-        {/* Logo */}
+    <div className="app-content">
         <h1>
-          <img src={taskifyLogo} alt="" width="300rem" />
+            <img 
+                src={taskifyLogo} 
+                alt="" width="300rem" 
+            />
         </h1>
         <br />
-        <div id="container">
-          {/* Task input component */}
-          <TaskInput onTaskAdd={addTask} />
-          {/* Separator */}
-          <div className="seperator" />
-          {/* Task list */}
-          <ul id="todo-list">
-            {/* Map through tasks and render TaskCard component for each task */}
-            {tasks.map((task) => (
-              <TaskCard
+            <div id="container">
+                <TaskInput 
+                onTaskAdd={addTask}
+             />
+            <div className="seperator" />
+            <ul 
+                id="todo-list">{tasks.map((task) => (
+                <TaskCard
                 key={task.id}
                 id={task.id}
                 task={task.task}
-                onDelete={deleteTask} // Pass deleteTask function to TaskCard
-              />
-            ))}
-          </ul>
-          {/* Button to delete all tasks */}
-          <button id="delete-all-button" onClick={deleteAll}>
-            Delete all
-          </button>
+                onDelete={deleteTask}
+                />
+            ))
+            }
+        </ul>
+        {tasks.length > 0 && <button 
+            id="delete-all-button" 
+            onClick={deleteAll}>
+                Delete all</button>
+        }
         </div>
-      </div>
+    </div>
     </>
+
   );
 }
 
-export default TaskUI;
+export default TaskUI
