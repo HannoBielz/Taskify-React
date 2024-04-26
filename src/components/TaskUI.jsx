@@ -29,7 +29,7 @@ return (
 
     <>
     <div className="app-content">
-        <h1>
+        <h1> {/* Logo */}   
             <img 
                 src={taskifyLogo} 
                 alt="" width="300rem" 
@@ -37,21 +37,27 @@ return (
         </h1>
         <br />
             <div id="container">
+                {/* Task input component */}
                 <TaskInput 
                 onTaskAdd={addTask}
              />
+             {/* Separator */}
             <div className="seperator" />
+             {/* Task list */}
             <ul 
-                id="todo-list">{tasks.map((task) => (
+                id="todo-list">
+                {/* Map through tasks and render TaskCard component for each task */}
+                {tasks.map((task) => (
                 <TaskCard
                 key={task.id}
                 id={task.id}
                 task={task.task}
-                onDelete={deleteTask}
+                onDelete={deleteTask} // Pass deleteTask function to TaskCard
                 />
             ))
             }
         </ul>
+        {/* Button to delete all tasks */}
         {tasks.length > 0 && <button 
             id="delete-all-button" 
             onClick={deleteAll}>
