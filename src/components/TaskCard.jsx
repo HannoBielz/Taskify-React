@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const TaskCard = ({ id, task, onDelete }) => {
-  const [isChecked, setIsChecked] = useState(false);
+const TaskCard = ({ id, task, onDelete, onMarkedAsDone, isChecked }) => {
+  // const [isChecked, setIsChecked] = useState(false);
+
+  // useEffect(() => {
+  //   onMarkedAsDone(id, isChecked);
+  //   console.log(`TaskCard: Task ${id} isChecked is ${isChecked}`);
+  // }, [isChecked]);
 
   function markAsDone() {
-    setIsChecked(!isChecked);
+    // setIsChecked(!isChecked);
+
+    onMarkedAsDone(id, !isChecked);
   }
 
   function handleDelete() {
