@@ -38,7 +38,10 @@ const TaskCard = ({ id, task, onDelete, onMarkedAsDone, isChecked }) => {
         className="taskText"
         id={`taskText${id}`}
         contentEditable="true"
-        style={{ textDecoration: isChecked ? "line-through" : "none" }}
+        style={{
+          textDecoration: isChecked ? "line-through" : "none",
+          color: isChecked ? "lightgray" : "black",
+        }}
       >
         {task}
       </p>
